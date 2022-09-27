@@ -1,0 +1,561 @@
+/* stylesheet */
+@charset "UTF-8";
+
+/* A Modern CSS Reset */
+*,*::before,*::after{box-sizing:border-box}body,h1,h2,h3,h4,p,figure,blockquote,dl,dd{margin:0}
+
+/*------------------------------------------------------
+ Base 
+------------------------------------------------------*/
+html {
+  font-size: 100%;
+}
+
+body{
+  color: #fff;
+  width: 100%;
+  line-height: 1.6;
+  font-weight: 300;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.17em;
+}
+
+h4 {
+  font-size: 1.12em;
+}
+
+h5 {
+  font-size: .83em;
+}
+
+h6 {
+  font-size: .75em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+a {
+  text-decoration: none;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+li {
+  list-style: none;
+}
+
+/* clearfix */
+.clearfix::before,
+.clearfix::after {
+  content: " ";
+  display: table;
+}
+
+.clearfix::after {
+  clear: both;
+}
+
+/* h1 */
+.site-title {
+  letter-spacing: 0.03em;
+  font-size: 6.25rem;
+  margin: 100px 0;
+  font-weight: 300;
+}
+
+/* h2 */
+.section-title {
+  letter-spacing: 0.03em;
+  font-size: 3.75rem;
+  font-weight: 300;
+  margin-bottom: 45px;
+  /* 下線をテキストと同じ幅に合わせる */
+  display: inline-block;
+  border-bottom: 1px solid #fff;
+}
+
+/* コンテンツ幅を設定するための共通クラス */
+.wrapper {
+  max-width: 800px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+/* mainとfooterを囲むクラス */
+.container {
+  background: #050507;
+  color: #fff;
+  text-align: center;
+}
+
+/* header
+================================================ */
+/* ヘッダーロゴ、ハンバーガーメニューは初期状態は非表示にする
+   所定のスクロール位置に来たらjqueryで表示する */
+.logo {
+  line-height: 1px;
+  position: fixed;
+  left: 30px;
+  top: 35px;
+  z-index: 40;
+  display: none;
+}
+.logo a {
+  display: block;
+}
+
+.hamburger {
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  position: fixed;
+  right: 25px;
+  top: 20px;
+  z-index: 40;
+  display: none;
+}
+
+.hamburger span {
+  width: 30px;
+  height: 1px;
+  background-color: #fff;
+  position: absolute;
+  left: 6px;
+  transition: 0.5s ease-in-out;
+}
+
+.hamburger span:nth-child(1) {
+  top: 11px;
+}
+
+.hamburger span:nth-child(2) {
+  top: 21px;
+}
+
+.hamburger span:nth-child(3) {
+  top: 31px;
+}
+
+.hamburger.active span:nth-child(1) {
+  top: 21px;
+  left: 6px;
+  transform: rotate(-45deg);
+}
+
+.hamburger.active span:nth-child(2),
+.hamburger.active span:nth-child(3) {
+  top: 21px;
+  transform: rotate(45deg);
+}
+
+#navi {
+  width: 100%;
+  background-color: #fff;
+  color: #050507;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  transform: translateY(-100%); 
+  transition: 0.6s;
+  /* ロゴ、ハンバーガーより下で背景画像より上に来るよう設定 */
+  z-index: 30;
+}
+
+#navi ul {
+  width: 100%;
+  background-color: #050507;
+  padding: 80px 0 30px 0;
+}
+
+#navi ul li {
+  padding: 10px 0;
+}
+
+#navi ul li a {
+  display: block;
+  color: #fff;
+}
+
+/* メニューを上から下にスライド */
+#navi.active {
+  transform: translateY(0%);
+}
+
+/* contents
+================================================ */
+
+/*----------------------------------------------
+mainvisual
+----------------------------------------------*/
+#mainvisual {
+  display: flex;
+  justify-content: center;
+  /* スクロールで画像を拡大した際に、横スクロールが出ないように設定 */
+  overflow-x: hidden;
+}
+
+#mainvisual img {
+  width: calc(100%/3);
+  height: 100vh;
+  object-fit: cover;
+  /* スクロールで画像を拡大した際に、画像が縮まないように設定 */
+  flex-shrink: 0;
+}
+
+
+/* フェード表示 */
+.fadein {
+  opacity: 0;
+  transform: translate(0,50%);
+  transition: 2s;
+}
+/* fadeinの要素が画面下に来たタイミングでjqueryのinviewにてshowクラスを追加して
+表示させる */
+.fadein.show {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+
+/*----------------------------------------------
+information
+----------------------------------------------*/
+#information {
+  margin-bottom: 140px;
+}
+
+.info-date-en {
+  font-size: 1.5rem;
+  display: block;
+}
+
+.info-time-en {
+  display: block;
+}
+
+.info-time-en, .info-date-ja {
+  font-size: 1.125rem;
+}
+
+.info-place {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 20px 0;
+}
+
+/*----------------------------------------------
+gallery
+----------------------------------------------*/
+#gallery {
+  margin-bottom: 480px;
+}
+
+#gallery .list {
+  padding-left: 0;
+}
+
+#gallery .list li {
+  margin-bottom: 60px;
+}
+
+#gallery .list li img {
+  width: 48%;
+}
+
+/* 奇数のliタグは左寄せ */
+#gallery .list li:nth-child(odd) {
+  text-align: left;
+}
+
+/* 偶数のliタグは右寄せ */
+#gallery .list li:nth-child(even) {
+  text-align: right;
+}
+
+
+/* ----------------------------------------------
+side-btn
+初期状態は画面の右側に隠しておく
+Galleryが画面下に来たタイミングで、jqueryでCSSを変更してスライドしながらボタンを表示
+Accessが画面下に来たタイミングで、jqueryでCSSを変更してスライドしながらボタンを非表示
+---------------------------------------------- */
+#side-btn {
+  border: 1px solid #fff;
+  position: fixed;
+  right: -144px;
+  bottom: 200px;
+  transform: rotate(-90deg) translateY(60px);
+  transition: 0.6s;
+  z-index: 30;
+}
+
+#side-btn a{
+  width: 165px;
+  font-size: 0.875rem;
+  display: inline-block;
+  letter-spacing: 0.1em;
+  padding: 15px 0;
+  transition: 0.3s;
+  color: #fff;
+}
+
+#side-btn a:last-of-type {
+  border-left: 1px solid #fff;
+}
+
+#side-btn a:hover {
+  opacity: 0.7;
+}
+
+/*----------------------------------------------
+access
+----------------------------------------------*/
+/* コンテンツが背景画像の上に来るようにする
+※デフォルトのposition（static）では、z-indexを指定できないため。
+「position: relative;」設定する */
+#access {
+  margin: 480px 0;
+  position: relative;
+  z-index: 20;
+}
+
+#access .place {
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+#access .address {
+  margin: 20px 0;
+}
+
+#access .btn {
+  display: inline-block;
+  border: 1px solid #fff;
+  color: #fff;
+  margin-top: 30px;
+  padding: 15px 82px;
+  transition: 0.3s;
+}
+
+#access .btn:hover {
+  background-color: #050507;
+}
+
+/*
+Accessの背景画像
+初期状態は非表示にしておく
+Accessのタイトルが画面下にきたタイミングで、jQueryのfadeInで表示する
+Contactのタイトルが画面下にきたタイミングで、jQueryのfadeOutで非表示にする
+「position: fixed;」で固定し「width: 100vw;」「height: 100vh;」で全画面表示する
+*/
+.bg {
+  background: url("../img/bg.jpg") center center repeat !important;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 10;
+}
+
+
+/*----------------------------------------------
+contact
+----------------------------------------------*/
+#contact {
+  margin-bottom: 200px;
+  position: relative;
+  z-index: 20;
+}
+
+#contact .btn {
+  width: 400px;
+  margin: 0 auto 20px auto;
+  display: block;
+  padding: 30px 0;
+  border: 1px solid #fff;
+  color: #fff;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* ボタン矢印 */
+#contact .btn::before, #contact .btn::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  background-color: #fff;
+  transition: 0.3s;
+  right: -40px;
+}
+
+/* 矢印の直線部分 */
+#contact .btn::before {
+  width: 120px;
+  top: 48px;
+}
+
+/* 矢印の先端部分 */
+#contact .btn::after {
+  width: 15px;
+  top: 45px;
+  transform: rotate(25deg);
+}
+
+#contact .btn:hover {
+  opacity: 0.7;
+}
+
+#contact .btn:hover::before, #contact .btn:hover::after {
+  right: -50px;
+}
+
+/* footer
+================================================ */
+
+#footer {
+  padding: 80px 30px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-top: 1px solid #fff;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+#footer p{
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+#footer div .sns {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  padding-left: 0;
+}
+
+#footer div .sns li {
+  margin-right: 15px;
+}
+
+#footer a {
+  color: #fff;
+}
+
+#footer .copyright {
+  display: flex;
+  align-items: center;
+}
+
+#footer .copyright li:last-child {
+  margin-left: 30px;
+}
+
+
+
+
+
+
+
+
+/*------------------------------------------------------
+ SP
+------------------------------------------------------*/
+@media screen and (max-width:900px) {
+  /* h1 */
+  .site-title {
+    font-size: 3rem;
+    margin: 50px 0;
+  }
+
+  /* h2 */
+  .section-title {
+    font-size: 2rem;
+  }
+
+  /*----------------------------------------------
+  information
+  ----------------------------------------------*/
+  #information {
+    margin-bottom: 80px;
+  }
+
+  .info-date-en, .info-time-en, .info-date-ja  {
+    font-size: 1rem;
+  }
+
+  .info-place {
+    font-size: 2rem;
+  }
+
+  /*----------------------------------------------
+  gallery
+  ----------------------------------------------*/
+  #gallery {
+    margin-bottom: 280px;
+  }
+  
+  #gallery .list li {
+    margin-bottom: 30px;
+  }
+
+  #gallery .list li img {
+    width: 100%;
+  }
+
+  /*----------------------------------------------
+  access
+  ----------------------------------------------*/
+  #access {
+    margin-bottom: 280px;
+  }
+
+  /*----------------------------------------------
+  contact
+  ----------------------------------------------*/
+  #contact .btn {
+    width: 100%;
+  }
+
+  /* ボタン矢印 */
+  #contact .btn::before, #contact .btn::after {
+    content: none;
+  }
+
+  /* footer
+================================================ */
+  #footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 60px 30px;
+  }
+  
+  #footer .sns {
+    margin-bottom: 30px;
+  }
+
+  #footer .copyright {
+    padding-left: 0;
+  }
+}
